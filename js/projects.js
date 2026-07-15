@@ -164,6 +164,29 @@ function setupFilters(projects) {
     renderProjects(projects, activeFilter);
 }
 
+// Contact email: keep mailto working, but also copy the address
+// so the link never feels dead if the visitor has no mail client set up
+function setupEmailCopy() {
+    const emailLink = document.querySelector('a[href^="mailto:"].contact-link');
+    if (!emailLink) return;
+
+    const email = emailLink.getAttribute('href').replace('mailto:', '');
+    const label = emailLink.querySelector('span');
+    const originalText = label ? label.textContent : 'Email';
+
+    emailLink.addEventListener('click', () => {
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(email).catch(() => {});
+        }
+        if (label) {
+            label.textContent = 'Copied!';
+            setTimeout(() => {
+                label.textContent = originalText;
+            }, 1800);
+        }
+    });
+}
+
 // Initialize portfolio
 async function initPortfolio() {
     const repos = await fetchRepositories();
@@ -178,4 +201,7 @@ async function initPortfolio() {
 }
 
 // Start when DOM is ready
-document.addEventListener('DOMContentLoaded', initPortfolio);
+document.addEventListener('DOMContentLoaded', () => {
+    initPortfolio();
+    setupEmailCopy();
+});
