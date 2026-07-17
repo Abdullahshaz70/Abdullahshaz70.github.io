@@ -193,7 +193,7 @@ Feel free to customize and use this portfolio template for your needs!
 
 ## Contact
 
-**Email**: asifmubeenly333@gmail.com  
+**Email**: abdullah.s7062@gmail.com  
 **GitHub**: https://github.com/Abdullahshaz70
 
 ---
