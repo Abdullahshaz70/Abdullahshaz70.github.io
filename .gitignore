@@ -1,20 +1,11 @@
-# Local development
-node_modules/
+node_modules
 .DS_Store
-Thumbs.db
-*.log
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# OS
+.env
 .env.local
-.env.*.local
-
-# Build outputs (if using build tools in future)
-dist/
-build/
+.next
+dist
+build
+*.log
+.turbo
+.vercel
+.cache
