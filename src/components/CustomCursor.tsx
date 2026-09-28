@@ -1,14 +1,10 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
 
 export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const cursorRingRef = useRef<HTMLDivElement>(null);
-  const [mousePosition, setMousePosition] = motion.useMotionTemplate``;
-  const x = useRef(0);
-  const y = useRef(0);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
