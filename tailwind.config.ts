@@ -26,8 +26,8 @@ const config: Config = {
         secondary: '#b026ff', // Violet accent
       },
       fontFamily: {
-        sans: ['var(--font-geist-sans)', 'system-ui', 'sans-serif'],
-        mono: ['var(--font-geist-mono)', 'monospace'],
+        sans: ['Geist', 'system-ui', 'sans-serif'],
+        mono: ['Geist Mono', 'monospace'],
       },
       animation: {
         'pulse-glow': 'pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
