@@ -11,27 +11,28 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@react-three/drei": "^9.108.3",
+    "@react-three/fiber": "^8.15.20",
+    "autoprefixer": "^10.4.19",
+    "clsx": "^2.1.1",
+    "framer-motion": "^10.16.16",
+    "gsap": "^3.12.2",
+    "lenis": "^1.1.18",
+    "lucide-react": "^0.408.0",
+    "next": "^14.2.3",
+    "postcss": "^8.4.38",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "next": "^14.2.3",
-    "typescript": "^5.4.5",
+    "react-intersection-observer": "^9.16.0",
     "tailwindcss": "^3.4.3",
-    "postcss": "^8.4.38",
-    "autoprefixer": "^10.4.19",
-    "framer-motion": "^10.16.16",
-    "three": "^r168",
-    "@react-three/fiber": "^8.15.20",
-    "@react-three/drei": "^9.108.3",
-    "lenis": "^1.1.18",
-    "gsap": "^3.12.2",
-    "lucide-react": "^0.408.0",
-    "clsx": "^2.1.1"
+    "three": "^0.168.0",
+    "typescript": "^5.4.5"
   },
   "devDependencies": {
     "@types/node": "^20.12.12",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "@types/three": "^r168",
+    "@types/three": "^0.168.0",
     "eslint": "^9.3.0",
     "eslint-config-next": "^14.2.3"
   }
