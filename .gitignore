@@ -1,11 +1,39 @@
-node_modules
-.DS_Store
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# Testing
+/coverage
+
+# Next.js
+/.next/
+/out/
+*.log
+
+# Environment
 .env
 .env.local
-.next
-dist
-build
-*.log
-.turbo
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Deployment
 .vercel
-.cache
+.turbo
+
+# Build
+dist/
+build/
+
+# Cache
+.cache/
+.eslintcache
