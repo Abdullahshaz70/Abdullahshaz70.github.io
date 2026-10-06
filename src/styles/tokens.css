@@ -1,0 +1,69 @@
+/*
+ * Design tokens. Three colours, two type families (plus mono for the one
+ * live data readout), a modular type scale, one spacing scale.
+ */
+:root {
+  --paper: #eeece6;
+  --ink: #161614;
+  --accent: #a83a0e;
+
+  /* Derived tints of ink, for secondary text and hairlines. */
+  --ink-muted: color-mix(in srgb, var(--ink) 66%, var(--paper));
+  --rule: color-mix(in srgb, var(--ink) 20%, var(--paper));
+  --guide: color-mix(in srgb, var(--ink) 7%, var(--paper));
+
+  /* Text: everything except headings, including nav, labels and numbers. */
+  --font-text: 'Schibsted Grotesk Variable', 'Schibsted Grotesk Fallback', Arial, sans-serif;
+  /* Display: h1, h2 and project titles only. */
+  --font-display: 'Newsreader Variable', 'Newsreader Fallback', Georgia, serif;
+  /* Mono: the figure's step/loss/σ readout only. */
+  --font-mono: 'IBM Plex Mono', 'IBM Plex Mono Fallback', 'Courier New', monospace;
+
+  /*
+   * Type scale: ratio 1.25 from a 15px base. Steps 5 and 7 are used for
+   * headings; narrow screens step each heading down two steps.
+   */
+  --text-xs: 0.75rem; /* step -1 · 12px, readout only */
+  --text-sm: 0.9375rem; /* step 0 · 15px, nav, labels, tables */
+  --text-base: 1.1719rem; /* step 1 · 18.75px, body */
+  --text-md: 1.4648rem; /* step 2 · 23.4px, lead, figures in lists */
+  --text-lg: 1.8311rem; /* step 3 · 29.3px, list titles */
+  --text-xl: 2.861rem; /* step 5 · 45.8px, section headings */
+  --text-2xl: 4.4703rem; /* step 7 · 71.5px, name */
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+
+  --leading-tight: 1.1;
+  --leading-snug: 1.35;
+  --leading-body: 1.55;
+  --measure: 62ch;
+
+  /* 4px base. Use only these. */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 160px;
+
+  --columns: 12;
+  --gutter: var(--space-5);
+  --margin: clamp(var(--space-4), 4vw, 56px);
+  --nav-height: 56px;
+
+  --ease-out: cubic-bezier(0.22, 0.8, 0.24, 1);
+}
+
+@media (max-width: 760px) {
+  :root {
+    --columns: 4;
+    --gutter: var(--space-4);
+    --text-xl: var(--text-lg);
+    --text-2xl: 2.861rem; /* step 5 */
+  }
+}

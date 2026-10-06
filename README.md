@@ -1,129 +1,83 @@
-# Premium Interactive Portfolio
+# Portfolio
 
-A modern, interactive portfolio built with React, Three.js, and advanced web technologies. Features smooth scrolling, responsive design, and dark theme.
+A single-page portfolio built around one figure: a loss surface that a marker descends as you scroll. Each section is a stretch of training. The surface starts noisy, smooths out, and converges by the contact section. The readout in the corner (`step`, `loss`, `σ`) shows where the run is.
 
-## Features
+Vite, React 19, TypeScript, three.js via React Three Fiber, Motion for the few UI transitions, and Lenis for smooth scrolling.
 
-- **Hero Section**: Large typography with call-to-action buttons
-- **About Section**: Introduction with structured layout
-- **Contact Section**: Contact form with social links
-- **Responsive Design**: Mobile-first, adapts to all screen sizes
-- **Smooth Animations**: CSS animations and transitions
-- **Modern Fonts**: Geist and Instrument Serif from Google Fonts
-- **Dark Theme**: Optimized for modern aesthetics
-- **Accessibility**: Semantic HTML and ARIA labels
+## Run
 
-## Tech Stack
-
-- **React**: UI framework
-- **Three.js**: 3D graphics (ready for future enhancements)
-- **Lenis**: Smooth scrolling library
-- **CSS3**: Advanced styling with custom properties
-
-## Getting Started
-
-### Setup
-
-1. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-
-2. **Customize content** - Replace placeholders in `Portfolio.dc.html`:
-   - `[YOUR NAME]` - Your full name
-   - `[YOUR EMAIL]` - Your email address
-   - `[YOUR CITY]` - Your location
-   - `[YOUR-GITHUB]` - Your GitHub username
-   - `[YOUR-LINKEDIN]` - Your LinkedIn handle (optional)
-
-3. **Run development server**:
-   ```bash
-   npm run dev
-   ```
-
-4. **Open in browser**:
-   - Navigate to `http://localhost:3000` (or the port shown)
-
-### File Structure
-
-```
-portfolio/
-├── Portfolio.dc.html     # Main portfolio template (dc-component format)
-├── support.js           # DC-runtime for template rendering
-├── package.json         # Project dependencies
-└── README.md           # This file
+```bash
+npm install
+npm run dev       # http://localhost:5173
+npm run build     # type-check and production build into dist/
+npm run preview   # serve the production build
+npm run lint
 ```
 
-## Customization
+Requires Node 20.19+ or 22.12+.
 
-### Colors
+## How to swap content
 
-The portfolio uses a custom accent color defined in the CSS:
+**All your details live in [`data.json`](data.json) in the project root.** The page fetches it on load, so edit it and reload; no code changes needed. Leave any text as `""` or any list as `[]` and that element is hidden. Keys starting with `_` are notes and are ignored.
 
-```css
-:root {
-  --acc: #c8f542  /* Change this to your brand color */
-}
+| Key | What it controls |
+| --- | --- |
+| `person` | Name (hero and browser tab), short name in the nav, `title` (search description), email, optional phone |
+| `nav` | Label for each section in the top nav |
+| `hero` | Tagline (`positioning`), the facts along the bottom, scroll cue |
+| `about` | Bio: lead sentence, paragraphs, fact list |
+| `projects` | The project list and each detail sheet: problem, approach, outcome metrics, stack, links |
+| `work` | Section title and meta line |
+| `contests` | Intro, summary numbers, platform ratings table, notable problems |
+| `stack` | Skills table. `seenIn` takes project `id`s and links each tool to its project sheet |
+| `contact` | Lead, social links |
+| `colophon`, `figure` | Footer text and the figure caption |
+
+Notes:
+
+- **Project `id`s** are referenced by `stack.groups[].items[].seenIn`. If you rename one, update both.
+- **Links:** `"href": "#"` is a placeholder. Absolute `http(s)` links open in a new tab automatically.
+- **Outcome metrics** read best as a short value plus a plain-language label (`"38 ms"` / `"per image on a $90 Android phone"`).
+- **If data.json has a mistake** (for example a trailing comma), the page still opens without your details and the browser console says what and where.
+- **After `npm run build`,** your details are in `dist/data.json`. Edit that file on the server, or edit the root `data.json` and rebuild.
+
+## Preloader
+
+A full-screen counter (markup and styles in [`index.html`](index.html), logic in [`src/lib/preloader.ts`](src/lib/preloader.ts)) covers the page until everything has loaded. It shows real progress, in this order: `data.json` (10%), fonts and images used on the page (30%), then the 3D scene (60%: downloading three.js, compiling shaders, first frame). It reaches 100% only when all three are done, then fades out. Anything that fails or stalls is skipped so the page always opens. Without WebGL or with reduced motion, the 3D stage completes immediately with the static poster.
+
+## Structure
+
+```
+src/
+  content.ts          content types, data.json loading and validation
+  App.tsx             page composition
+  sections/           Hero, About, Work, Contests, Stack, Contact
+  components/         Nav, Hud, ProjectSheet, Figure (ready-gate), Poster, …
+  scene/              three.js scene, lazy-loaded
+  lib/
+    landscape.ts      the loss function and precomputed SGD path
+    choreography.ts   per-section camera keyframes and training progress
+    projection.ts     camera math for the static poster (no three.js)
+    figure.ts         drawing constants shared by scene and poster
+    scrollState.ts    scroll position as a "section float", outside React
+  hooks/              media queries, scroll tracking, smooth scroll
+  styles/             tokens.css (palette, type scale, spacing), fonts.css, global.css
 ```
 
-### Content Sections
+## Changing the look
 
-Edit `Portfolio.dc.html` to:
-- Update the about section description
-- Add or modify sections
-- Change social media links
-- Update contact form endpoint
+- **Palette:** three variables at the top of [`src/styles/tokens.css`](src/styles/tokens.css): `--paper`, `--ink`, `--accent`. The 3D scene reads them at startup, so canvas and page always match.
+- **Type:** Schibsted Grotesk for all text, Newsreader for headings (h1, h2, project titles), IBM Plex Mono only for the step/loss/σ readout. Sizes come from a 1.25 modular scale in `tokens.css` (`--text-xs` … `--text-2xl`); use only those, and only the two weights (`--weight-regular`, `--weight-medium`). Use the `.figures` class (tabular figures) only on elements that are purely numeric: in Schibsted, `tnum` also widens commas and periods.
+- **Swapping a typeface:** change the fontsource import in `src/main.tsx`, the family in `tokens.css`, the filename pattern in `vite.config.ts` (font preloads), and recompute the fallback metrics in `src/styles/fonts.css`, otherwise text will shift when the font loads.
+- **Camera moves:** one keyframe per section in [`src/lib/choreography.ts`](src/lib/choreography.ts). `shift` slides the figure sideways (as a fraction of viewport width) so it sits beside the text.
+- **The surface itself:** `loss()` in [`src/lib/landscape.ts`](src/lib/landscape.ts). If you change it, check that the descent still makes steady progress; the comment on `runDescent` explains why the gradient is damped.
 
-### Fonts
+## Behaviour notes
 
-The portfolio loads fonts from Google Fonts:
-- **Geist**: Main typeface (300-700 weights)
-- **Geist Mono**: Monospace (400, 500)
-- **Instrument Serif**: Display/italic (regular, italic)
+- **Loading.** See [Preloader](#preloader). The critical font files are preloaded and have metric-matched fallbacks, so nothing reflows when they arrive. The canvas stays invisible while it waits for final layout, compiles its shaders and renders one complete frame for the current scroll position; only then does it fade in.
+- **Poster.** Visitors who prefer reduced motion, browsers without WebGL or with software-only WebGL, low-end devices (≤2 cores or ≤2 GB memory), data-saver mode, and devices that can't finish warming up in 2.5s get a static drawing of the scene's opening frame instead. It's rendered from the same surface and camera, so it matches the 3D composition.
+- **Rendering.** The canvas renders only when the scroll position changes, never while idle. DPR is fixed per session: min(devicePixelRatio, 1.75) on desktop, 1.25 on narrow screens, where the grid also drops from 84² to 44² vertices.
 
-To change fonts, modify the `<link>` in the `<helmet>` section.
+## Hosting
 
-## Deployment
-
-### To Vercel (Recommended for Next.js)
-
-1. Push to GitHub
-2. Connect to Vercel
-3. Vercel will auto-deploy on push
-
-### To other platforms
-
-1. Build: `npm run build`
-2. Deploy the `.next` folder or static export
-
-## Browser Support
-
-- Chrome/Edge (latest)
-- Firefox (latest)
-- Safari (latest)
-- Mobile browsers (iOS Safari, Chrome Mobile)
-
-## Performance
-
-The portfolio is optimized for:
-- Fast load times
-- Smooth 60fps animations
-- Mobile performance
-- Accessibility
-
-## Future Enhancements
-
-- [ ] 3D background animation (Three.js)
-- [ ] Project showcase carousel
-- [ ] Blog section
-- [ ] Dark/Light theme toggle
-- [ ] Contact form backend integration
-- [ ] Analytics integration
-
-## Support
-
-For issues or questions about the design, refer to the original design system or submit an issue.
-
-## License
-
-Created with [Claude Code](https://claude.com/claude-code)
+Serve `dist/assets/*` with `Cache-Control: public, max-age=31536000, immutable` (the files are content-hashed) and `index.html` with `no-cache`. Without the immutable header, a reload revalidates the font preloads while the page reuses fonts it already has, and Chrome logs "preloaded but not used" warnings. `npm run preview` already sends these headers.

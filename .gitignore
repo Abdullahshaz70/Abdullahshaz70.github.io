@@ -1,39 +1,5 @@
-# Dependencies
-node_modules/
-/.pnp
-.pnp.js
-
-# Testing
-/coverage
-
-# Next.js
-/.next/
-/out/
-*.log
-
-# Environment
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
+node_modules
+dist
+*.local
+.vite
 .DS_Store
-
-# Deployment
-.vercel
-.turbo
-
-# Build
-dist/
-build/
-
-# Cache
-.cache/
-.eslintcache

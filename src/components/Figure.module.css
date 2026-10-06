@@ -1,0 +1,73 @@
+/* Reserved at its final size from the first paint, in the scene's background colour. */
+.figure {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--paper);
+}
+
+.stage {
+  position: absolute;
+  inset: 0;
+}
+
+/* The canvas stays invisible until its first complete frame is on screen. */
+.stage[data-enter='gate'] {
+  opacity: 0;
+  transition: opacity 600ms var(--ease-out);
+}
+
+.stage[data-enter='gate'][data-visible] {
+  opacity: 1;
+}
+
+/* A poster that replaces a failed or too-slow 3D attempt fades in. One shown from the first paint doesn't. */
+.stage[data-enter='fade'] {
+  animation: fade-in 600ms var(--ease-out) both;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/*
+ * Shown only if warming up takes noticeably long (e.g. a slow network).
+ * Plain text, no motion: it appears after 800ms and is removed when ready.
+ */
+.status {
+  position: absolute;
+  top: 50%;
+  left: 75%;
+  translate: -50% -50%;
+  font-size: var(--text-sm);
+  color: var(--ink-muted);
+  visibility: hidden;
+  animation: reveal-status 0s 800ms forwards;
+}
+
+@keyframes reveal-status {
+  to {
+    visibility: visible;
+  }
+}
+
+@media (max-width: 760px) {
+  .figure {
+    opacity: 0.4;
+  }
+
+  .status {
+    left: 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage[data-enter='gate'],
+  .stage[data-enter='fade'] {
+    transition: none;
+    animation: none;
+  }
+}

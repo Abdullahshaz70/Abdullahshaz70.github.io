@@ -1,0 +1,18 @@
+/* Shared vertical rhythm for numbered sections. */
+.section {
+  position: relative;
+  padding-top: var(--space-10);
+  padding-bottom: var(--space-9);
+  align-content: start;
+}
+
+.section:focus {
+  outline: none;
+}
+
+@media (max-width: 760px) {
+  .section {
+    padding-top: var(--space-9);
+    padding-bottom: var(--space-8);
+  }
+}

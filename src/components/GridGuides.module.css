@@ -1,0 +1,20 @@
+.guides {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.guides > div {
+  height: 100%;
+}
+
+.guides span {
+  border-inline: 1px solid var(--guide);
+}
+
+@media (max-width: 760px) {
+  .guides span:nth-child(n + 5) {
+    display: none;
+  }
+}

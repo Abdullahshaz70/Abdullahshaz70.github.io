@@ -1,0 +1,191 @@
+.dialog {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  overflow: hidden;
+}
+
+.dialog::backdrop {
+  background: color-mix(in srgb, var(--ink) 40%, transparent);
+  animation: backdrop-in 400ms var(--ease-out);
+  transition: opacity 400ms var(--ease-out);
+}
+
+.dialog[data-closing]::backdrop {
+  opacity: 0;
+}
+
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.sheet {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: min(760px, 100%);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: var(--space-5) var(--space-8) var(--space-8);
+  background: var(--paper);
+  border-left: 1px solid var(--ink);
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--rule);
+}
+
+.close {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  padding: var(--space-2) 0;
+}
+
+.close:hover {
+  color: var(--ink-muted);
+}
+
+.key {
+  padding: 0 var(--space-1);
+  border: 1px solid var(--rule);
+  color: var(--ink-muted);
+}
+
+.title {
+  margin-top: var(--space-8);
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+}
+
+.problem {
+  margin-top: var(--space-5);
+  max-width: 40ch;
+  font-size: var(--text-md);
+  line-height: var(--leading-snug);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-5);
+  margin-top: var(--space-7);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--rule);
+}
+
+.facts dd {
+  margin-top: var(--space-1);
+  font-size: var(--text-sm);
+}
+
+.block {
+  margin-top: var(--space-7);
+}
+
+.block > h3 {
+  margin-bottom: var(--space-3);
+}
+
+.metrics {
+  display: grid;
+  border-top: 1px solid var(--rule);
+}
+
+.metrics li {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: var(--space-5);
+  align-items: baseline;
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--rule);
+}
+
+.value {
+  font-size: var(--text-md);
+}
+
+.metricLabel {
+  font-size: var(--text-sm);
+  color: var(--ink-muted);
+}
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  font-size: var(--text-sm);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+}
+
+.links a:hover {
+  color: var(--ink-muted);
+}
+
+.footer {
+  margin-top: var(--space-9);
+  border-top: 1px solid var(--ink);
+}
+
+.next {
+  display: grid;
+  gap: var(--space-2);
+  width: 100%;
+  padding-top: var(--space-4);
+  text-align: left;
+}
+
+.nextTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  line-height: var(--leading-tight);
+}
+
+.next:hover .nextTitle {
+  color: var(--accent);
+}
+
+@media (max-width: 760px) {
+  .sheet {
+    padding: var(--space-4) var(--margin) var(--space-7);
+    border-left: 0;
+  }
+
+  .title {
+    margin-top: var(--space-7);
+  }
+
+  .facts {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  .metrics li {
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dialog::backdrop {
+    animation: none;
+    transition: none;
+  }
+}

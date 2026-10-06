@@ -1,0 +1,86 @@
+.nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 10;
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+  font-size: var(--text-sm);
+}
+
+.inner {
+  height: var(--nav-height);
+  align-items: center;
+}
+
+.brand {
+  grid-column: 1 / span 3;
+  justify-self: start;
+  text-decoration: none;
+  font-weight: var(--weight-medium);
+}
+
+.initials {
+  display: none;
+}
+
+.links {
+  grid-column: 6 / -1;
+  justify-self: end;
+}
+
+.links ol {
+  display: flex;
+  gap: var(--space-5);
+}
+
+/* Active: ink colour and a 1px rule on the nav's bottom edge. Hover: colour only. */
+.links a {
+  display: flex;
+  align-items: center;
+  height: var(--nav-height);
+  color: var(--ink-muted);
+  text-decoration: none;
+  box-shadow: inset 0 -1px 0 transparent;
+}
+
+.links a:hover {
+  color: var(--ink);
+}
+
+.links a[aria-current] {
+  color: var(--ink);
+  box-shadow: inset 0 -1px 0 var(--ink);
+}
+
+@media (max-width: 760px) {
+  .brand {
+    grid-column: 1;
+  }
+
+  .full {
+    display: none;
+  }
+
+  .initials {
+    display: inline;
+  }
+
+  .links {
+    grid-column: 2 / -1;
+  }
+
+  .links ol {
+    gap: var(--space-3);
+  }
+}
+
+/* Below 360px the five links need the full width; the name leads the hero anyway. */
+@media (max-width: 359px) {
+  .brand {
+    display: none;
+  }
+
+  .links {
+    grid-column: 1 / -1;
+  }
+}

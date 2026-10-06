@@ -1,0 +1,48 @@
+/* Spans the full grid; expects to sit directly inside a .grid container. */
+.header {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  align-items: baseline;
+  padding-top: var(--space-4);
+  margin-bottom: var(--space-8);
+  border-top: 1px solid var(--ink);
+}
+
+.number {
+  grid-column: 1;
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+}
+
+.title {
+  grid-column: 2 / span 7;
+  font-size: var(--text-xl);
+}
+
+.meta {
+  grid-column: 10 / -1;
+  justify-self: end;
+  text-align: right;
+}
+
+@media (max-width: 760px) {
+  .header {
+    margin-bottom: var(--space-7);
+  }
+
+  .title {
+    grid-column: 1 / -1;
+    order: 1;
+    margin-top: var(--space-3);
+  }
+
+  .number {
+    grid-column: 1 / span 2;
+  }
+
+  .meta {
+    grid-column: 3 / -1;
+  }
+}

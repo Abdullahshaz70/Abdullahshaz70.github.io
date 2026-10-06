@@ -1,83 +1,89 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #07080a;
-      color: #eef0f2;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    }
-    #root {
-      width: 100%;
-      min-height: 100vh;
-    }
-    .loading {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      font-size: 18px;
-      color: #8b9099;
-    }
-  </style>
-</head>
-<body>
-  <div id="root">
-    <div class="loading">Loading portfolio...</div>
-  </div>
-
-  <!-- Load React from CDN -->
-  <script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
-
-  <!-- Load the dc-runtime support -->
-  <script src="./support.js"></script>
-
-  <!-- Inline the Portfolio component -->
-  <script>
-    // Simple loader for the Portfolio.dc.html
-    fetch('./Portfolio.dc.html')
-      .then(res => res.text())
-      .then(html => {
-        const doc = new DOMParser().parseFromString(html, 'text/html');
-        const dcContent = doc.querySelector('x-dc');
-        const helmet = dcContent?.querySelector('helmet');
-
-        if (dcContent) {
-          // Copy head elements
-          if (helmet) {
-            const headElements = helmet.querySelectorAll('*');
-            headElements.forEach(el => {
-              document.head.appendChild(el.cloneNode(true));
-            });
-          }
-
-          // Copy body content
-          const root = document.getElementById('root');
-          root.innerHTML = '';
-
-          // Copy main content
-          const mainContent = dcContent.querySelector('main') || dcContent;
-          if (mainContent) {
-            root.appendChild(mainContent.cloneNode(true));
-          }
-
-          // Copy footer
-          const footer = dcContent.querySelector('footer');
-          if (footer) {
-            root.appendChild(footer.cloneNode(true));
-          }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Title and description are filled in from data.json → person (src/main.tsx). -->
+    <meta name="description" content="" />
+    <meta name="theme-color" content="#eeece6" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Portfolio</title>
+    <!--
+      Preloader styles are inline so it paints before any CSS file or script
+      loads. They use the design tokens from src/styles/tokens.css, with
+      fallbacks for the moment before that stylesheet arrives.
+    -->
+    <style>
+      .preloader {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 0 var(--margin, 24px) var(--space-7, 48px);
+        background: var(--paper, #eeece6);
+        color: var(--ink, #161614);
+        font-family: var(--font-text, Arial, sans-serif);
+        transition: opacity 600ms var(--ease-out, ease-out);
+      }
+      .preloader[data-state='done'] {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .preloader-label {
+        margin: 0;
+        font-size: var(--text-sm, 0.9375rem);
+        color: var(--ink-muted, #646360);
+      }
+      .preloader-count {
+        margin: var(--space-2, 8px) 0 var(--space-5, 24px);
+        font-family: var(--font-display, Georgia, serif);
+        font-size: var(--text-2xl, 4.4703rem);
+        line-height: 1;
+        font-variant-numeric: tabular-nums;
+      }
+      /* Room for "100", right-aligned, so the % sign never moves as digits are added. */
+      .preloader-count [data-preloader-count] {
+        display: inline-block;
+        min-width: 3ch;
+        text-align: right;
+      }
+      .preloader-track {
+        height: 1px;
+        background: var(--rule, #cfcdc7);
+      }
+      .preloader-bar {
+        height: 100%;
+        background: var(--ink, #161614);
+        transform: scaleX(0);
+        transform-origin: left;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .preloader {
+          transition: none;
         }
-      })
-      .catch(err => {
-        console.error('Failed to load portfolio:', err);
-        document.getElementById('root').innerHTML = '<div class="loading">Error loading portfolio. Please refresh the page.</div>';
-      });
-  </script>
-</body>
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Full-screen preloader with real progress, driven by src/lib/preloader.ts. -->
+    <div
+      id="preloader"
+      class="preloader"
+      role="progressbar"
+      aria-label="Loading"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="0"
+      data-lenis-prevent
+    >
+      <p class="preloader-label">Loading</p>
+      <p class="preloader-count"><span data-preloader-count>0</span>%</p>
+      <div class="preloader-track"><div class="preloader-bar" data-preloader-bar></div></div>
+    </div>
+    <!-- inert until the preloader is done: not focusable or announced while hidden. -->
+    <div id="root" inert></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

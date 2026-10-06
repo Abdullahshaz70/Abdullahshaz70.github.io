@@ -1,0 +1,265 @@
+{
+  "_comment": "✏️ Your details live here. Edit any value and reload the page. Leave a text as \"\" or a list as [] to hide it. Keys starting with _ are notes and are ignored.",
+
+  "person": {
+    "_comment": "name: hero heading and browser tab. shortName: top-left of the nav. title: the description search engines show. phone is optional and appears under your email.",
+    "name": "Abdullah Shahzad",
+    "shortName": "A. Shahzad",
+    "title": "AI student, computer vision and ML engineer, and Flutter developer who ships real products.",
+    "email": "abdullah.s7062@gmail.com",
+    "phone": ""
+  },
+
+  "nav": {
+    "_comment": "Labels in the top navigation, one per section.",
+    "about": "About",
+    "work": "Work",
+    "contests": "Contests",
+    "stack": "Stack",
+    "contact": "Contact"
+  },
+
+  "hero": {
+    "_comment": "positioning: your tagline under the name. meta: the facts along the bottom of the first screen (education, location, availability...).",
+    "positioning": "I build vision models, retrieval systems, and mobile apps, and I care more about why a solution works than whether it merely runs.",
+    "scrollCue": "Scroll to train",
+    "meta": [
+      { "label": "Studying", "value": "BS Artificial Intelligence, ITU (2024–2028)" },
+      { "label": "Based in", "value": "Lahore, UTC+5" },
+      { "label": "Currently", "value": "AI Engineer Intern, SyntekAI" }
+    ]
+  },
+
+  "figure": {
+    "_comment": "Caption in the bottom-right corner, next to the 3D figure.",
+    "label": "Fig. 1",
+    "caption": "A toy loss surface. Scrolling runs 1,200 steps of SGD with momentum; σ is minibatch noise, annealed as training goes on."
+  },
+
+  "about": {
+    "_comment": "Your bio. lead: the first, larger sentence. body: one entry per paragraph. facts: short label/value lines (current role, experience, interests...).",
+    "title": "About",
+    "meta": "Short version",
+    "lead": "Languages and frameworks change. Strong fundamentals don't, so I try to understand why a solution works, not just make it work.",
+    "body": [
+      "I'm an AI student at Information Technology University in Lahore. Most of my work sits where machine learning meets real products: a facial-recognition attendance system packaged for a gym SaaS, a RAG backend deployed on Hugging Face Spaces, and predictive models inside a production ranking pipeline.",
+      "Right now I'm an AI Engineer Intern at SyntekAI, working on computer vision and IoT for NeuroBin, a smart waste-sorting bin. Before that I spent a summer at FlyRankAI, where I raised classification precision from 71% to 89%.",
+      "I also build mobile and web apps in Flutter, from a Play Store expense tracker to a real-time jobs marketplace, and I keep my C++ and data-structures fundamentals sharp on LeetCode and with from-scratch projects."
+    ],
+    "facts": [
+      { "label": "Currently", "value": "AI Engineer Intern, SyntekAI (on-site)" },
+      { "label": "Previously", "value": "Machine Learning Intern, FlyRankAI (remote)" },
+      { "label": "Focus", "value": "Computer vision, applied ML, RAG, Flutter" },
+      { "label": "Languages", "value": "English, Urdu, Punjabi, Hindi" }
+    ]
+  },
+
+  "work": {
+    "_comment": "Heading for the projects list. openLabel is the small 'Open →' on each row.",
+    "title": "Selected work",
+    "meta": "8 projects and internship work",
+    "openLabel": "Open"
+  },
+
+  "projects": [
+    {
+      "_comment": "One object per project. id must be unique: the stack table's seenIn lists refer to it. problem: one sentence. outcome: up to ~3 short value/label pairs. links: use full https:// URLs to open in a new tab.",
+      "id": "flyrank",
+      "title": "FlyRank ranking pipeline",
+      "kind": "Machine learning internship",
+      "year": "2026",
+      "role": "ML Intern, FlyRankAI, remote, Jun–Aug 2026",
+      "problem": "FlyRank's ranking pipeline needed a reliable way to flag declining content without drowning reviewers in false positives.",
+      "approach": "Built and tuned four predictive models (Logistic Regression and Random Forest) to flag declining content. Cleaned and engineered features across 12,000+ content records, and shipped weekly model iterations that senior engineers reviewed.",
+      "outcome": [
+        { "value": "71% → 89%", "label": "classification precision" },
+        { "value": "35%", "label": "reduction in pipeline runtime" },
+        { "value": "22%", "label": "lower false-positive rate across 5 review cycles" }
+      ],
+      "stack": ["Python", "scikit-learn", "Logistic Regression", "Random Forest", "Feature engineering"],
+      "links": []
+    },
+    {
+      "id": "faceattend",
+      "title": "Facial-Recognition Attendance",
+      "kind": "Computer vision",
+      "year": "",
+      "role": "Solo",
+      "problem": "Gyms and classes lose time and accuracy on manual sign-in sheets.",
+      "approach": "A multi-module attendance system that captures faces with OpenCV, turns them into InsightFace embeddings, and matches them against a ChromaDB vector store. It is packaged as Windows executables with PyInstaller, with Firebase Auth and Firestore-based subscription gating for a gym SaaS product. A sibling project, Auto-Registration Facial Attendance, enrols new faces automatically so nobody has to be registered by hand.",
+      "outcome": [],
+      "stack": ["Python", "InsightFace", "OpenCV", "ChromaDB", "SQLite", "PyInstaller", "Firebase"],
+      "links": [
+        { "label": "Code", "href": "#" }
+      ]
+    },
+    {
+      "id": "rag-tutor",
+      "title": "RAG Physics Tutor",
+      "kind": "LLM systems",
+      "year": "",
+      "role": "Solo",
+      "problem": "Students need physics answers grounded in course material, not confident guesses from a general-purpose model.",
+      "approach": "A retrieval-augmented generation backend: SentenceTransformer embeddings, ChromaDB retrieval, and LLM answer generation behind a FastAPI service. Deployed on Hugging Face Spaces, with Firebase Auth and Redis-based rate limiting to secure and scale the API.",
+      "outcome": [],
+      "stack": ["Python", "FastAPI", "ChromaDB", "SentenceTransformers", "Redis", "Firebase", "Hugging Face Spaces"],
+      "links": [
+        { "label": "Code", "href": "#" }
+      ]
+    },
+    {
+      "id": "gymora",
+      "title": "Gymora",
+      "kind": "Mobile and web app",
+      "year": "",
+      "role": "Solo",
+      "problem": "Gym member attendance relies on paper or manual sign-in, which is slow and easy to get wrong.",
+      "approach": "A gym management app in Flutter, deployed on both mobile and web through Firebase Hosting. QR check-in replaces traditional sign-in, and role-based authentication separates gym-owner and client access.",
+      "outcome": [],
+      "stack": ["Flutter", "Dart", "Firebase Auth", "Firestore", "Firebase Hosting"],
+      "links": [
+        { "label": "Live app", "href": "#" }
+      ]
+    },
+    {
+      "id": "hazir",
+      "title": "Hazir App",
+      "kind": "Mobile marketplace",
+      "year": "",
+      "role": "Solo",
+      "problem": "Finding a barber, plumber, or other local provider means calling around, with no idea who is available right now.",
+      "approach": "An 'Uber for blue-collar work' in Flutter that shows which local jobs and service providers are available in real time. Includes booking, live queue visibility, provider profiles, and provider management, all synced through Firebase.",
+      "outcome": [],
+      "stack": ["Flutter", "Dart", "Firebase"],
+      "links": [
+        { "label": "Code", "href": "#" }
+      ]
+    },
+    {
+      "id": "cashmitra",
+      "title": "CashMitra",
+      "kind": "Published Android app",
+      "year": "",
+      "role": "Solo",
+      "problem": "Tracking everyday spending usually needs an account and a connection, which puts people off.",
+      "approach": "An expense tracker in Flutter with category breakdowns and local data persistence, so it works fully on the device. Published on Google Play.",
+      "outcome": [
+        { "value": "100+", "label": "downloads on Google Play" },
+        { "value": "5 stars", "label": "rating" }
+      ],
+      "stack": ["Flutter", "Dart", "Local persistence", "Google Play"],
+      "links": [
+        { "label": "Play Store", "href": "#" }
+      ]
+    },
+    {
+      "id": "ml-scratch",
+      "title": "ML Algorithms from Scratch",
+      "kind": "Machine learning fundamentals",
+      "year": "",
+      "role": "Solo",
+      "problem": "Calling a library hides what gradient descent and threshold tuning actually do.",
+      "approach": "Linear and Logistic Regression implemented from scratch in NumPy, including gradient descent, k-fold cross-validation, and threshold tuning, then benchmarked against scikit-learn.",
+      "outcome": [],
+      "stack": ["Python", "NumPy", "scikit-learn"],
+      "links": [
+        { "label": "Code", "href": "#" }
+      ]
+    },
+    {
+      "id": "abdkitaab",
+      "title": "ABDKitaab",
+      "kind": "Systems and data structures",
+      "year": "",
+      "role": "Solo",
+      "problem": "I wanted to understand how a version-control tool tracks history, not just use one.",
+      "approach": "A mini Git clone in C++ built from scratch with linked lists and hash maps to track file history and generate diffs.",
+      "outcome": [],
+      "stack": ["C++", "Linked lists", "Hash maps"],
+      "links": [
+        { "label": "Code", "href": "#" }
+      ]
+    }
+  ],
+
+  "contests": {
+    "_comment": "Competitive programming. summary: a few headline numbers. platforms: one row per site in the ratings table. problems: notable problems with a one-line note.",
+    "title": "Competitive programming",
+    "meta": "Profile stats as of Oct 2026",
+    "intro": "C++ is my main language for problem solving, and most of my practice is on LeetCode. My strongest tags there are divide and conquer, dynamic programming, and monotonic stack.",
+    "summary": [
+      { "label": "LeetCode problems solved (C++)", "value": "127" },
+      { "label": "Strongest topics", "value": "D&C, DP, Monotonic stack" },
+      { "label": "Most-solved tag", "value": "Array (72)" }
+    ],
+    "platforms": [
+      { "name": "LeetCode", "handle": "abdulla_90", "href": "https://leetcode.com/u/abdulla_90/", "rating": "", "peak": "", "standing": "Global rank 1,351,467" },
+      { "name": "Codeforces", "handle": "Abdullah_Shahzad", "href": "https://codeforces.com/profile/Abdullah_Shahzad", "rating": "", "peak": "", "standing": "" }
+    ],
+    "problemsTitle": "Problems I still think about",
+    "problems": []
+  },
+
+  "stack": {
+    "_comment": "Your skills, grouped by area. comfort: any word (\"Learning\" is shown muted). seenIn: project ids from the projects list above.",
+    "title": "Stack",
+    "meta": "What I use, and where",
+    "columns": { "name": "Tool", "use": "Used for", "comfort": "Comfort", "seenIn": "Seen in" },
+    "groups": [
+      {
+        "area": "Languages",
+        "items": [
+          { "name": "Python", "use": "ML models, RAG backends, computer vision", "comfort": "Daily", "seenIn": ["flyrank", "faceattend", "rag-tutor", "ml-scratch"] },
+          { "name": "C++", "use": "Data structures, problem solving, systems projects", "comfort": "Daily", "seenIn": ["abdkitaab"] },
+          { "name": "Dart", "use": "Flutter apps on Android and web", "comfort": "Regular", "seenIn": ["gymora", "hazir", "cashmitra"] },
+          { "name": "SQL", "use": "Relational data and queries", "comfort": "Regular", "seenIn": [] }
+        ]
+      },
+      {
+        "area": "Machine learning and vision",
+        "items": [
+          { "name": "NumPy, scikit-learn", "use": "Classification, feature engineering, model evaluation", "comfort": "Daily", "seenIn": ["flyrank", "ml-scratch"] },
+          { "name": "OpenCV, InsightFace", "use": "Face capture, embeddings, recognition", "comfort": "Regular", "seenIn": ["faceattend"] },
+          { "name": "Hugging Face, SentenceTransformers", "use": "Embeddings and LLM-based pipelines", "comfort": "Regular", "seenIn": ["rag-tutor"] },
+          { "name": "ChromaDB", "use": "Vector search for face matching and RAG retrieval", "comfort": "Regular", "seenIn": ["faceattend", "rag-tutor"] }
+        ]
+      },
+      {
+        "area": "Mobile and backend",
+        "items": [
+          { "name": "Flutter", "use": "Cross-platform mobile and web front ends", "comfort": "Daily", "seenIn": ["gymora", "hazir", "cashmitra"] },
+          { "name": "Firebase", "use": "Auth, Firestore, real-time sync, hosting", "comfort": "Regular", "seenIn": ["faceattend", "rag-tutor", "gymora", "hazir"] },
+          { "name": "FastAPI, Redis", "use": "APIs and rate limiting", "comfort": "Regular", "seenIn": ["rag-tutor"] },
+          { "name": "PostgreSQL, MongoDB", "use": "Databases for backend work", "comfort": "Learning", "seenIn": [] }
+        ]
+      },
+      {
+        "area": "Fundamentals",
+        "items": [
+          { "name": "Data structures and algorithms", "use": "LeetCode practice and from-scratch builds", "comfort": "Regular", "seenIn": ["abdkitaab"] },
+          { "name": "OOP, databases, discrete maths", "use": "University coursework and projects", "comfort": "Regular", "seenIn": [] }
+        ]
+      }
+    ]
+  },
+
+  "contact": {
+    "_comment": "lead: the sentence above your email. channels: your social links (GitHub, LinkedIn, CV...). Your email and phone come from person above.",
+    "title": "Contact",
+    "meta": "Lahore, UTC+5",
+    "lead": "Questions about any project on this page, or something you want to build? Send me an email.",
+    "channels": [
+      { "label": "GitHub", "href": "https://github.com/Abdullahshaz70" },
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/in/abdullah-shahzad-aa9402277" },
+      { "label": "LeetCode", "href": "https://leetcode.com/u/abdulla_90/" },
+      { "label": "Codeforces", "href": "https://codeforces.com/profile/Abdullah_Shahzad" },
+      { "label": "CV (PDF)", "href": "#" }
+    ]
+  },
+
+  "colophon": {
+    "_comment": "Small print at the very bottom of the page.",
+    "text": "Set in Schibsted Grotesk and Newsreader. The surface is a bowl plus ripples plus σ-scaled noise, descended with SGD (momentum 0.9). Built with React Three Fiber.",
+    "copyright": "© 2026 Abdullah Shahzad"
+  }
+}
